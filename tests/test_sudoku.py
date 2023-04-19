@@ -16,7 +16,15 @@ class SudokuTests(unittest.TestCase):
         sudoku = Sudoku()
         self.assertFalse(sudoku.is_solved)
 
+    def test_field_can_be_accessed_via_index(self):
+        sudoku = Sudoku()
+        try:
+            sudoku[0, 0]
+        except Exception as exception:
+            self.fail(exception)
+
     def test_an_empty_sudoku_has_a_zero_in_every_field(self):
         sudoku = Sudoku()
-        for field_coords in itertools.product(range(9), repeat=2):
-            self.assertEqual(sudoku[field_coords], 0)
+        for pos in itertools.product(range(9), repeat=2):
+            with self.subTest(pos=pos):
+                self.assertEqual(sudoku[pos], 0)

@@ -3,11 +3,12 @@
 
 class Sudoku:
     def __init__(self):
-        pass
+        self._field = [[0] * 9] * 9
 
     @property
-    def is_solved(self):
-        return False
+    def is_solved(self) -> bool:
+        return not any(0 in row for row in self._field)
 
-    def __getitem__(self, position):
-        return 0
+    def __getitem__(self, position: tuple[int, int]) -> int:
+        col_num, row_num = position
+        return self._field[row_num][col_num]
